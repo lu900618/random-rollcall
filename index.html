@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+
+    <script src="js/common.js"></script>
+</head>
+
+<body>
+<h1>谁来交作业</h1>
+
+<div id="content">
+
+    <div id="set">
+        <div id="scope">
+            <label for="">设置单人选择学号范围</label>&nbsp;&nbsp;
+            <label for="">从</label>
+            <input type="text" placeholder="1" class="ipt" id="from">
+            <label for="">到</label>
+            <input type="text" placeholder="48" class="ipt" id="to">
+            <input type="button" value="设置" id="btnSet">
+        </div>
+        <div id="leave">
+
+        </div>
+
+        <input type="button" value="开始" id="btn" class="start">
+        <input type="button" value="抽取小组开始" id="btnGroup" class="btnGroup">
+    </div>
+</div>
+<script>
+
+
+    var content = document.getElementById("content");
+    var btn = document.getElementById("btn");
+
+    // 创建div
+    for (var i = 0; i < students.length; i++) {
+        var st = students[i];
+        // 循环创建并添加学生对象
+        var stu = document.createElement("div");
+        content.appendChild(stu);
+        stu.className = "person";
+        stu.id = "stu" + st.id;
+        stu.group = st.group;
+
+        /*// 姓名
+         var spanName = document.createElement("span");
+         stu.appendChild(spanName);
+         spanName.innerText = st.name;*/
+
+        var arr = [];
+        arr.push('<div class="flip-container" ontouchstart="this.classList.toggle(\'hover\');">');
+        arr.push('<div class="flipper">');
+        arr.push('<div class="front">');
+        arr.push(' <!-- 前面内容 -->');
+        arr.push(' <span>' + st.name + '</span>');
+        arr.push('</div>');
+        arr.push('<div class="back">');
+        arr.push('<span>' + st.id + '</span>');
+        arr.push('</div>');
+        arr.push('</div>');
+        arr.push('</div>');
+
+        stu.innerHTML = arr.join("");
+
+    }
+
+    // 创建占位对象
+    zhanwei(my$("stu39"));
+    zhanwei(my$("stu32"));
+    zhanwei(my$("stu24"));
+    zhanwei(my$("stu11"));
+    zhanwei(my$("stu45"));
+    zhanwei(my$("stu2"));
+    for (var i = 0; i < 6; i++) {
+        zhanwei(my$("stu23"));
+    }
+
+    // 设置位置
+    var stuList = content.getElementsByClassName("person");
+    for (var k = 0; k < stuList.length; k++) {
+        stuList[k].style.top = 80 * parseInt(k / 10) + 10 + "px";
+        stuList[k].style.left = 120 * parseInt(k % 10) + 60 + "px";
+    }
+
+    my$("btnSet").onclick = function () {
+        my$("from").value = my$("from").value ? my$("from").value : 1;
+        my$("to").value = my$("to").value ? my$("to").value : 48;
+        this.setAttribute("clicked", true);
+        this.setAttribute("from", my$("from").value);
+        this.setAttribute("to", my$("to").value);
+    };
+
+    btn.onclick = function () {
+        clearInterval(this.timer);
+        if (this.value === "开始") {
+            my$("btnGroup").disabled = true;
+            this.timer = setInterval(seleteStudent, 250);
+            // 改变按钮显示文字
+            document.getElementById("btn").value = "停止";
+        } else if (this.value === "停止") {
+            my$("btnGroup").disabled = false;
+            // 清除计时器 改变显示文字
+            clearInterval(this.timer);
+            document.getElementById("btn").value = "开始";
+        }
+
+    };
+
+    my$("btnGroup").onclick = function () {
+        clearInterval(this.timer);
+        if (this.value === "抽取小组开始") {
+            my$("btn").disabled = true;
+            this.timer = setInterval(selectGroup, 300);
+            // 改变按钮显示文字
+            my$("btnGroup").value = "抽取小组停止";
+        } else if (this.value === "抽取小组停止") {
+            my$("btn").disabled = false;
+            // 清除计时器 改变显示文字
+            clearInterval(this.timer);
+            my$("btnGroup").value = "抽取小组开始";
+        }
+    };
+
+
+</script>
+</body>
+
+</html>

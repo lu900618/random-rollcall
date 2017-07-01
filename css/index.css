@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.current {
+    background-color: rgba(255, 0, 0, .2);
+}
+
+body {
+    background-color: #eee;
+}
+
+i {
+    font-style: normal;
+}
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.start {
+    position: absolute;
+    left: 1100px;
+    top: 30px;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.btnGroup {
+    position: absolute;
+    left: 900px;
+    top: 30px;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+#set {
+    width: 1160px;
+    height: 50px;
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 30px 10px 10px;
+    position: absolute;
+    top: -130px;
+    left: 60px;
+}
+
+.ipt {
+    height: 20px;
+    width: 20px;
+}
+
+#content {
+    width: 1300px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+    top: 200px;
+}
+
+#content .person {
+    width: 100px;
+    height: 60px;
+    border: 2px solid #3e3412;
+    float: left;
+    position: absolute;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#content .person span {
+    font: 600 26px/60px "Microsoft Yahei";
+}
+
+.road {
+    border: none !important;
+}
+
+.flip-container {
+    perspective: 1000; /*透视属性*/
+}
+
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg); /*鼠标hover时,旋转180度*/
+}
+
+.flip-container, .front, .back {
+    width: 100px;
+    height: 60px;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 正面的值大于背面的, 保证正面在上面*/
+.front {
+    z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+    color: #CC00FF;
+    font-family: "华文新魏";
+}
+
+/*
+在最外层的容器元素上设置整个动画区域的透视(perspective)属性。
+当外层容器元素遇到鼠标悬停事件时，内部存放卡片的容器旋转180度。这里也是控制旋转速度的地方。如果将旋转值设置为-180deg，是反向旋转。
+表示卡片正面和背面的元素都要绝对定位，这样它们才能在相同的位置相互遮挡。它们的背面可视性(backface-visibility)属性设置为隐藏，这样每个卡片的背面在翻转时都是看不见的。
+将卡片的正面设置为一个比背面要高的z-index值，这样保证卡片的正面在最上面。
+将背面卡片旋转180度，这样让它扮演背面的角色。*/
